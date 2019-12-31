@@ -1,2 +1,2 @@
 # blastem_discord_sdk_api
-A Discord interface for the BlastEm emulator.
+A simple Discord interface for the BlastEm emulator.
