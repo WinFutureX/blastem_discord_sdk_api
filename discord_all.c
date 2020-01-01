@@ -4,7 +4,7 @@
 	Licenced under the GNU GPL v3.
 */
 
-// NOTE: currently working on win64, linux64 (macos untested)
+// NOTE: currently works on win64 and linux64 (macos untested)
 
 #include <stdio.h>
 #include <stdlib.h>
