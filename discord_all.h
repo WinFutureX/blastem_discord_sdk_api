@@ -11,8 +11,8 @@
 
 struct application
 {
-    struct IDiscordCore *core;
-    struct IDiscordActivityManager *activities;
+	struct IDiscordCore *core;
+	struct IDiscordActivityManager *activities;
 } app;
 
 extern enum EDiscordResult DiscordCreate(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
