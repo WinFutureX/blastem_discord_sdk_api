@@ -27,8 +27,7 @@ int init_discord()
 		app.core = NULL; // in the event api isn't available
 		app.activities = NULL;
 		return 1;
-	}
-	else
+	} else
 	{
 		printf("Discord API initialised\n");
 	}
