@@ -1,12 +1,13 @@
 /*
 	discord_all.c: BlastEm's Discord interface for all platforms (main source).
-	Copyright 2019 Kelsey Boey.
+	Copyright 2020 Kelsey Boey.
 	Licenced under the GNU GPL v3.
 */
 
+// NOTE: currently working on win64, linux64 (macos untested)
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "blastem.h"
 #include "discord_all.h"
 #include "util.h"
 #include "romdb.h"
