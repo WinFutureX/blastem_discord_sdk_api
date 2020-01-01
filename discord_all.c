@@ -37,23 +37,13 @@ int init_discord()
 
 void update_discord_activities(int in_menu)
 {
-	if (app.core == NULL)
-	{
-		return;
-	}
+	if (app.core == NULL) return;
 	extern rom_info *info;
 	extern system_header *current_system;
 	struct DiscordActivity activity;
 	memset(&activity, 0, sizeof(activity));
 	activity.timestamps.start = time(NULL);
-	const char *name;
-	if (in_menu != 1)
-	{
-		name = current_system->info.name;
-	} else
-	{
-		name = "Menu";
-	}
+	const char *name = (in_menu != 1) ? current_system->info.name : "Menu";
 	strcpy(activity.details, name);
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
 	return;
@@ -61,20 +51,14 @@ void update_discord_activities(int in_menu)
 
 void run_discord_callbacks()
 {
-	if (app.core == NULL)
-	{
-		return;
-	}
+	if (app.core == NULL) return;
 	app.core->run_callbacks(app.core);
 	return;
 }
 
 void close_discord()
 {
-	if (app.core == NULL)
-	{
-		return;
-	}
+	if (app.core == NULL) return; // doesn't need to do anything anyway
 	app.core = NULL;
 	app.activities = NULL;
 	return;
