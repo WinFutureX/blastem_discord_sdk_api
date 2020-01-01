@@ -1,6 +1,6 @@
 /*
 	discord_all.h: BlastEm's Discord interface for all platforms (header).
-	Copyright 2019 Kelsey Boey.
+	Copyright 2020 Kelsey Boey.
 	Licenced under the GNU GPL v3.
 */
 
@@ -11,8 +11,8 @@
 
 struct application
 {
-    struct IDiscordCore* core;
-    struct IDiscordActivityManager* activities;
+    struct IDiscordCore *core;
+    struct IDiscordActivityManager *activities;
 } app;
 
 extern enum EDiscordResult DiscordCreate(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
