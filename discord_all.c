@@ -24,13 +24,11 @@ int init_discord()
 	if (DiscordCreate(DISCORD_VERSION, &params, &app.core) != DiscordResult_Ok)
 	{
 		warning("DiscordCreate failed\n");
-		app.core = NULL; // in the event api isn't available
+		app.core = NULL; // in case api isn't available
 		app.activities = NULL;
 		return 1;
-	} else
-	{
-		printf("Discord API initialised\n");
 	}
+	printf("Discord API initialised\n");
 	app.activities = app.core->get_activity_manager(app.core);
 	return 0;
 }
