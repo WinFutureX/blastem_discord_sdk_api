@@ -32,7 +32,7 @@ extern enum EDiscordResult DiscordCreate(DiscordVersion version, struct DiscordC
 
 // prototypes
 extern int init_discord();
-extern void update_discord_activities(int in_menu);
+extern void update_discord_activities(int status);
 extern void run_discord_callbacks();
 extern void close_discord();
 
