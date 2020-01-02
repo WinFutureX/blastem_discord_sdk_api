@@ -34,9 +34,10 @@ int init_discord()
 	struct DiscordCreateParams params;
 	params.client_id = 660727500179111956;
 	params.flags = DiscordCreateFlags_Default;
-	if (DiscordCreate(DISCORD_VERSION, &params, &app.core) != DiscordResult_Ok)
+	result = DiscordCreate(DISCORD_VERSION, &params, &app.core);
+	if (result != DiscordResult_Ok)
 	{
-		warning("DiscordCreate failed\n");
+		warning("DiscordCreate failed - returned %d\n", result);
 		app.core = NULL; // in case api isn't available
 		app.activities = NULL;
 		return 1;
