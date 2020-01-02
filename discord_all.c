@@ -47,16 +47,34 @@ int init_discord()
 	return 0;
 }
 
-void update_discord_activities(int in_menu)
+void update_discord_activities(int status)
 {
+	/*
+		values for status:
+		0: game loaded and running
+		1: game loaded, but paused
+		2: game not loaded, ignore
+	*/
 	if (app.core == NULL) return;
 	extern rom_info *info;
 	extern system_header *current_system;
 	struct DiscordActivity activity;
 	memset(&activity, 0, sizeof(activity));
 	activity.timestamps.start = time(NULL);
-	const char *name = (in_menu != 1) ? current_system->info.name : "Menu";
+	const char *name = (status < 2) ? current_system->info.name : "Menu";
+	const char *running;
+	if (status == 0)
+	{
+		running = "Running";
+	} else if (status == 1)
+	{
+		running = "Paused";
+	} else
+	{
+		running = "Not in-game";
+	}
 	strcpy(activity.details, name);
+	strcpy(activity.state, running);
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
 	return;
 }
