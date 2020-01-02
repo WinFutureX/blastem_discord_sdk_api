@@ -30,7 +30,7 @@ int init_discord()
 {
 	extern struct application app;
 	memset(&app, 0, sizeof(app));
-	extern enum EDiscordResult result;
+	static enum EDiscordResult result;
 	struct DiscordCreateParams params;
 	params.client_id = 660727500179111956;
 	params.flags = DiscordCreateFlags_Default;
