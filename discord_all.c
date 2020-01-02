@@ -63,12 +63,9 @@ void update_discord_activities(int status)
 	activity.timestamps.start = time(NULL);
 	const char *name = (status < 2) ? current_system->info.name : "Menu";
 	const char *running;
-	if (status == 0)
+	if (status < 2)
 	{
-		running = "Running";
-	} else if (status == 1)
-	{
-		running = "Paused";
+		running = (status == 0) ? "Running" : "Paused";
 	} else
 	{
 		running = "Not in-game";
