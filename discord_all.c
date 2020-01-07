@@ -61,16 +61,15 @@ void update_discord_activities(int status)
 	struct DiscordActivity activity;
 	memset(&activity, 0, sizeof(activity));
 	activity.timestamps.start = time(NULL);
-	const char *name = (status < 2) ? current_system->info.name : "Menu";
 	const char *running;
 	if (status < 2)
 	{
+		strcpy(activity.details, current_system->info.name);
 		running = (status == 0) ? "Running" : "Paused";
 	} else
 	{
-		running = "Not in-game";
+		running = "Idle";
 	}
-	strcpy(activity.details, name);
 	strcpy(activity.state, running);
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
 	return;
