@@ -71,6 +71,7 @@ void update_discord_activities(int status)
 		running = "Idle";
 	}
 	strcpy(activity.state, running);
+	strcpy(activity.assets.large_image, "icon");
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
 	return;
 }
