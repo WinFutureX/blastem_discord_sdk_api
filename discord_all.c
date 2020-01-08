@@ -28,7 +28,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
-#elif __linux__
+#else
 #include <dlfcn.h>
 #endif
 
@@ -54,7 +54,11 @@ int init_discord()
 	void *handle;
 	double (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	char *error;
+	#ifdef __linux__
 	handle = dlopen("discord_game_sdk.so", RTLD_LAZY);
+	#elif __APPLE__
+	handle = dlopen("discord_game_sdk.dylib", RTLD_LAZY);
+	#endif
 	if (!handle)
 	{
 		warning("Couldn't load SDK API library\n");
