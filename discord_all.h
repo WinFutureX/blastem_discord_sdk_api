@@ -28,8 +28,6 @@ struct application
 	struct IDiscordActivityManager *activities;
 } app;
 
-extern enum EDiscordResult DiscordCreate(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
-
 // prototypes
 extern int init_discord();
 extern void update_discord_activities(int status);
