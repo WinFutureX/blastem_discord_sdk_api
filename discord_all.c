@@ -54,7 +54,7 @@ int init_discord()
 	void *handle;
 	double (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	char *error;
-	handle = dlopen("lib/discord_game_sdk.so", RTLD_LAZY);
+	handle = dlopen("discord_game_sdk.so", RTLD_LAZY);
 	if (!handle)
 	{
 		warning("Couldn't load SDK API library\n");
