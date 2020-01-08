@@ -26,8 +26,30 @@
 #include "romdb.h"
 #include "system.h"
 
+#ifdef __linux__
+#include <dlfcn.h>	
+#endif
+
 int init_discord()
 {
+	// attempt to load SDK API library
+	#ifdef __linux__
+	void *handle;
+	double (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
+	char *error;
+	handle = dlopen("lib/discord_game_sdk.so", RTLD_LAZY);
+	if (!handle)
+	{
+		warning("Couldn't load SDK API library\n");
+		return 1;
+	}
+	create_discord = dlsym(handle, "DiscordCreate");
+	if ((error = dlerror()) != NULL)
+	{
+		warning("Couldn't find the DiscordCreate function\n");
+		return 1;
+	}
+	#endif
 	extern struct application app;
 	memset(&app, 0, sizeof(app));
 	static enum EDiscordResult result;
