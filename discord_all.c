@@ -72,6 +72,7 @@ void update_discord_activities(int status)
 	}
 	strcpy(activity.state, running);
 	strcpy(activity.assets.large_image, "icon");
+	strcpy(activity.assets.large_text, "A fast and accurate Sega Mega Drive emulator");
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
 	return;
 }
