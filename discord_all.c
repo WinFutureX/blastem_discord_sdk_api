@@ -59,7 +59,7 @@ int init_discord()
 	#elif __APPLE__
 	handle = dlopen("discord_game_sdk.dylib", RTLD_LAZY);
 	#endif
-	if (!handle)
+	if (handle == NULL)
 	{
 		warning("Couldn't load SDK API library\n");
 		return 1;
