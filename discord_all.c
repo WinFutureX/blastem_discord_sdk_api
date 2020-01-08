@@ -50,7 +50,7 @@ int init_discord()
 		warning("Couldn't find the DiscordCreate function\n");
 		return 1;
 	}
-	#elif __linux__ // for linux
+	#else // for linux and possibly macos
 	void *handle;
 	double (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	char *error;
