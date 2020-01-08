@@ -53,14 +53,10 @@ int init_discord()
 	uint32_t (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	create_discord = dlsym(handle, "DiscordCreate");
 	#endif
-	if (handle == NULL)
-	{
-		warning("Couldn't load SDK API library\n");
-		return 1;
-	}
 	if (create_discord == NULL)
 	{
-		warning("Couldn't find the DiscordCreate function\n");
+		if (handle == NULL) warning("Couldn't load SDK API library\n");
+		else warning("Couldn't find the DiscordCreate function\n");
 		return 1;
 	}
 	extern struct application app;
