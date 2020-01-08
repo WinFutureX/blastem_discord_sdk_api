@@ -37,7 +37,6 @@ int init_discord()
 	// attempt to load SDK API library
 	#ifdef _WIN32 // for windows
 	typedef int (__stdcall *f_crdiscord)();
-	__declspec(dllimport) enum EDiscordResult DiscordCreate(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	void *handle;
 	handle = LoadLibrary("discord_game_sdk.dll");
 	if (handle == NULL)
