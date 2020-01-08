@@ -26,8 +26,10 @@
 #include "romdb.h"
 #include "system.h"
 
-#ifdef __linux__
-#include <dlfcn.h>	
+#ifdef _WIN32
+#include <windows.h>
+#elif __linux__
+#include <dlfcn.h>
 #endif
 
 int init_discord()
