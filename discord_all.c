@@ -33,7 +33,23 @@
 int init_discord()
 {
 	// attempt to load SDK API library
-	#ifdef __linux__
+	#ifdef _WIN32 // for windows
+	typedef int (__stdcall *f_crdiscord)();
+	__declspec(dllimport) enum EDiscordResult DiscordCreate(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
+	void *handle;
+	handle = LoadLibrary("discord_game_sdk.dll");
+	if (handle == NULL)
+	{
+		warning("Couldn't load SDK API library\n");
+		return 1;
+	}
+	f_crdiscord create_discord = (f_crdiscord)GetProcAddress(handle, "DiscordCreate");
+	if (create_discord == NULL)
+	{
+		warning("Couldn't find the DiscordCreate function\n");
+		return 1;
+	}
+	#elif __linux__ // for linux
 	void *handle;
 	double (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	char *error;
@@ -56,7 +72,7 @@ int init_discord()
 	struct DiscordCreateParams params;
 	params.client_id = 660727500179111956;
 	params.flags = DiscordCreateFlags_Default;
-	result = DiscordCreate(DISCORD_VERSION, &params, &app.core);
+	result = create_discord(DISCORD_VERSION, &params, &app.core);
 	if (result != DiscordResult_Ok)
 	{
 		warning("DiscordCreate failed - returned %d\n", result);
