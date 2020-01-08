@@ -28,49 +28,41 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#define DISCORD_LIB "discord_game_sdk.dll"
 #else
 #include <dlfcn.h>
+#if __APPLE__
+#define DISCORD_LIB "discord_game_sdk.dylib"
+#else
+#define DISCORD_LIB "discord_game_sdk.so"
+#endif
 #endif
 
 int init_discord()
 {
 	// attempt to load SDK API library
-	#ifdef _WIN32 // for windows
+	void *handle; // common library handle
+	#ifdef _WIN32
+	// for windows
 	typedef int (__stdcall *f_crdiscord)();
-	void *handle;
-	handle = LoadLibrary("discord_game_sdk.dll");
+	handle = LoadLibrary(DISCORD_LIB);
+	f_crdiscord create_discord = (f_crdiscord)GetProcAddress(handle, "DiscordCreate");
+	#else
+	// for linux and possibly macos
+	handle = dlopen(DISCORD_LIB, RTLD_LAZY);
+	uint32_t (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
+	create_discord = dlsym(handle, "DiscordCreate");
+	#endif
 	if (handle == NULL)
 	{
 		warning("Couldn't load SDK API library\n");
 		return 1;
 	}
-	f_crdiscord create_discord = (f_crdiscord)GetProcAddress(handle, "DiscordCreate");
 	if (create_discord == NULL)
 	{
 		warning("Couldn't find the DiscordCreate function\n");
 		return 1;
 	}
-	#else // for linux and possibly macos
-	void *handle;
-	double (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
-	char *error;
-	#ifdef __linux__
-	handle = dlopen("discord_game_sdk.so", RTLD_LAZY);
-	#elif __APPLE__
-	handle = dlopen("discord_game_sdk.dylib", RTLD_LAZY);
-	#endif
-	if (handle == NULL)
-	{
-		warning("Couldn't load SDK API library\n");
-		return 1;
-	}
-	create_discord = dlsym(handle, "DiscordCreate");
-	if ((error = dlerror()) != NULL)
-	{
-		warning("Couldn't find the DiscordCreate function\n");
-		return 1;
-	}
-	#endif
 	extern struct application app;
 	memset(&app, 0, sizeof(app));
 	static enum EDiscordResult result;
