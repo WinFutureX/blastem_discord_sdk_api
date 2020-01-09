@@ -41,15 +41,14 @@
 int init_discord()
 {
 	// attempt to load SDK API library
-	void *handle; // common library handle
 	#ifdef _WIN32
 	// for windows
 	typedef int (__stdcall *f_crdiscord)();
-	handle = LoadLibrary(DISCORD_LIB);
+	void *handle = LoadLibrary(DISCORD_LIB);
 	f_crdiscord create_discord = (f_crdiscord)GetProcAddress(handle, "DiscordCreate");
 	#else
 	// for linux and possibly macos
-	handle = dlopen(DISCORD_LIB, RTLD_LAZY);
+	void *handle = dlopen(DISCORD_LIB, RTLD_LAZY);
 	uint32_t (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
 	create_discord = dlsym(handle, "DiscordCreate");
 	#endif
@@ -69,8 +68,6 @@ int init_discord()
 	if (result != DiscordResult_Ok)
 	{
 		warning("DiscordCreate failed - returned %d\n", result);
-		app.core = NULL; // in case api isn't available
-		app.activities = NULL;
 		return 1;
 	}
 	printf("Discord API initialised\n");
