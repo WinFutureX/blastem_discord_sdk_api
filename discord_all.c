@@ -44,17 +44,17 @@ int init_discord()
 	#ifdef _WIN32
 	// for windows
 	typedef int (__stdcall *f_crdiscord)();
-	void *handle = LoadLibrary(DISCORD_LIB);
-	f_crdiscord create_discord = (f_crdiscord)GetProcAddress(handle, "DiscordCreate");
+	void *discord_handle = LoadLibrary(DISCORD_LIB);
+	f_crdiscord create_discord = (f_crdiscord)GetProcAddress(discord_handle, "DiscordCreate");
 	#else
 	// for linux and possibly macos
-	void *handle = dlopen(DISCORD_LIB, RTLD_LAZY);
+	void *discord_handle = dlopen(DISCORD_LIB, RTLD_LAZY);
 	uint32_t (*create_discord)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
-	create_discord = dlsym(handle, "DiscordCreate");
+	create_discord = dlsym(discord_handle, "DiscordCreate");
 	#endif
 	if (create_discord == NULL)
 	{
-		if (handle == NULL) warning("Couldn't load SDK API library\n");
+		if (discord_handle == NULL) warning("Couldn't load SDK API library\n");
 		else warning("Couldn't find the DiscordCreate function\n");
 		return 1;
 	}
