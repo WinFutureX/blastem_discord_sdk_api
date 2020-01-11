@@ -63,7 +63,7 @@ int init_discord()
 	static enum EDiscordResult result;
 	struct DiscordCreateParams params;
 	params.client_id = 660727500179111956;
-	params.flags = DiscordCreateFlags_Default;
+	params.flags = DiscordCreateFlags_NoRequireDiscord;
 	result = create_discord(DISCORD_VERSION, &params, &app.core);
 	if (result != DiscordResult_Ok)
 	{
@@ -115,6 +115,7 @@ void run_discord_callbacks()
 void close_discord()
 {
 	if (app.core == NULL) return; // doesn't need to do anything anyway
+	app.core->destroy(app.core);
 	app.core = NULL;
 	app.activities = NULL;
 	return;
