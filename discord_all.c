@@ -115,6 +115,7 @@ void run_discord_callbacks()
 void close_discord()
 {
 	if (app.core == NULL) return; // doesn't need to do anything anyway
+	if (app.activities != NULL) app.activities->clear_activity(app.activities, NULL, NULL);
 	app.core->destroy(app.core);
 	app.core = NULL;
 	app.activities = NULL;
