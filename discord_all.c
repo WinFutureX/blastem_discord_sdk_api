@@ -31,7 +31,7 @@
 #define DISCORD_LIB "discord_game_sdk.dll"
 #else
 #include <dlfcn.h>
-#if __APPLE__
+#ifdef __APPLE__
 #define DISCORD_LIB "discord_game_sdk.dylib"
 #else
 #define DISCORD_LIB "discord_game_sdk.so"
