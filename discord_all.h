@@ -29,9 +29,9 @@ struct application
 } app;
 
 // prototypes
-extern int init_discord();
-extern void update_discord_activities(int status);
-extern void run_discord_callbacks();
-extern void close_discord();
+extern int discord_startup();
+extern void discord_update_activities(int status);
+extern void discord_run_callbacks();
+extern void discord_shutdown();
 
 #endif
