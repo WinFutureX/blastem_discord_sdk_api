@@ -84,6 +84,7 @@ void discord_update_activities(int status)
 		2: game not loaded, ignore
 	*/
 	if (app.core == NULL) return;
+	if (app.activities == NULL) return;
 	extern rom_info *info;
 	extern system_header *current_system;
 	struct DiscordActivity activity;
