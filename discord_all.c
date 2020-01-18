@@ -45,7 +45,7 @@ int discord_startup()
 	// for windows
 	void *discord_handle = LoadLibrary(DISCORD_LIB);
 	typedef int (__stdcall *f_discord_create)(DiscordVersion version, struct DiscordCreateParams* params, struct IDiscordCore** result);
-	f_discord_create discord_create = (f_discordcreate)GetProcAddress(discord_handle, "DiscordCreate");
+	f_discord_create discord_create = (f_discord_create)GetProcAddress(discord_handle, "DiscordCreate");
 	#else
 	// for linux and possibly macos
 	void *discord_handle = dlopen(DISCORD_LIB, RTLD_LAZY);
