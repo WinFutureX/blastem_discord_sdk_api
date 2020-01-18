@@ -38,7 +38,7 @@
 #endif
 #endif
 
-int init_discord()
+int discord_startup()
 {
 	// attempt to load SDK API library
 	#ifdef _WIN32
@@ -75,7 +75,7 @@ int init_discord()
 	return 0;
 }
 
-void update_discord_activities(int status)
+void discord_update_activities(int status)
 {
 	/*
 		values for status:
@@ -105,14 +105,14 @@ void update_discord_activities(int status)
 	return;
 }
 
-void run_discord_callbacks()
+void discord_run_callbacks()
 {
 	if (app.core == NULL) return;
 	app.core->run_callbacks(app.core);
 	return;
 }
 
-void close_discord()
+void discord_shutdown()
 {
 	if (app.core == NULL) return; // doesn't need to do anything anyway
 	if (app.activities != NULL) app.activities->clear_activity(app.activities, NULL, NULL);
