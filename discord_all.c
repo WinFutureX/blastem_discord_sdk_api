@@ -93,13 +93,13 @@ void discord_update_activities(int status)
 	const char *running;
 	if (status < 2)
 	{
-		strcpy(activity.details, current_system->info.name);
+		strcpy(activity.state, current_system->info.name);
 		running = (status == 0) ? "Running" : "Paused";
 	} else
 	{
 		running = "Idle";
 	}
-	strcpy(activity.state, running);
+	strcpy(activity.details, running);
 	strcpy(activity.assets.large_image, "icon");
 	strcpy(activity.assets.large_text, "A fast and accurate Sega Mega Drive emulator");
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
