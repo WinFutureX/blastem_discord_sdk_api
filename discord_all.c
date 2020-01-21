@@ -90,16 +90,25 @@ void discord_update_activities(int status)
 	struct DiscordActivity activity;
 	memset(&activity, 0, sizeof(activity));
 	activity.timestamps.start = time(NULL);
-	const char *running;
-	if (status < 2)
+	switch (status)
 	{
-		strcpy(activity.state, current_system->info.name);
-		running = (status == 0) ? "Running" : "Paused";
-	} else
-	{
-		running = "Idle";
+		case 0:
+			strcpy(activity.state, current_system->info.name);
+			strcpy(activity.details, "Running");
+			break;
+		case 1:
+			strcpy(activity.state, current_system->info.name);
+			strcpy(activity.details, "Paused");
+			break;
+		case 2:
+			strcpy(activity.details, "Idle");
+			break;
+		default:
+			warning("Invalid game state: not 0, 1 or 2");
+			strcpy(activity.state, "I don't care");
+			strcpy(activity.details, "** INVALID GAME STATE **");
+			break;
 	}
-	strcpy(activity.details, running);
 	strcpy(activity.assets.large_image, "icon");
 	strcpy(activity.assets.large_text, "A fast and accurate Sega Mega Drive emulator");
 	app.activities->update_activity(app.activities, &activity, NULL, NULL);
