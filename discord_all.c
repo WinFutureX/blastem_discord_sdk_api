@@ -105,7 +105,6 @@ void discord_update_activities(int status)
 			break;
 		default:
 			warning("Invalid game state: not 0, 1 or 2");
-			strcpy(activity.state, "I don't care");
 			strcpy(activity.details, "** INVALID GAME STATE **");
 			break;
 	}
