@@ -38,7 +38,7 @@ typedef enum
 
 // prototypes
 extern int discord_startup();
-extern void discord_update_activities(int status);
+extern void discord_update_activity(int status);
 extern void discord_run_callbacks();
 extern void discord_shutdown();
 
