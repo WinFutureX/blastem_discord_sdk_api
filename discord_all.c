@@ -38,6 +38,7 @@
 #endif
 #endif
 
+// returns 0 on success, 1 otherwise
 int discord_startup()
 {
 	// attempt to load SDK API library
@@ -83,7 +84,7 @@ void discord_update_activities(int status)
 		1: game loaded, but paused
 		2: game not loaded, ignore
 	*/
-	discord_game_status game_status = status;
+	discord_game_status game_status = status; // refer to header file
 	if (app.core == NULL) return;
 	if (app.activities == NULL) return;
 	extern rom_info *info;
