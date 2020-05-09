@@ -76,7 +76,7 @@ int discord_startup()
 	return 0;
 }
 
-void discord_update_activities(int status)
+void discord_update_activity(int status)
 {
 	/*
 		values for status:
