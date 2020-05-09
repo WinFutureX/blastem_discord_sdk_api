@@ -31,9 +31,9 @@ struct application
 // game status
 typedef enum
 {
-	DISCORD_GAME_NOT_LOADED,
+	DISCORD_GAME_LOADED_RUNNING,
 	DISCORD_GAME_LOADED_PAUSED,
-	DISCORD_GAME_LOADED_RUNNING
+	DISCORD_GAME_NOT_LOADED
 } discord_game_status;
 
 // prototypes
