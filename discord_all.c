@@ -83,6 +83,7 @@ void discord_update_activities(int status)
 		1: game loaded, but paused
 		2: game not loaded, ignore
 	*/
+	discord_game_status game_status = status;
 	if (app.core == NULL) return;
 	if (app.activities == NULL) return;
 	extern rom_info *info;
@@ -90,22 +91,21 @@ void discord_update_activities(int status)
 	struct DiscordActivity activity;
 	memset(&activity, 0, sizeof(activity));
 	activity.timestamps.start = time(NULL);
-	switch (status)
+	switch (game_status)
 	{
-		case 0:
+		case DISCORD_GAME_LOADED_RUNNING: // 0
 			strcpy(activity.state, current_system->info.name);
 			strcpy(activity.details, "Running");
 			break;
-		case 1:
+		case DISCORD_GAME_LOADED_PAUSED: // 1
 			strcpy(activity.state, current_system->info.name);
 			strcpy(activity.details, "Paused");
 			break;
-		case 2:
+		case DISCORD_GAME_NOT_LOADED: // 2
 			strcpy(activity.details, "Idle");
 			break;
 		default:
-			warning("Invalid game state: not 0, 1 or 2");
-			strcpy(activity.details, "** INVALID GAME STATE **");
+			warning("Invalid game state: not 0, 1 or 2\n");
 			break;
 	}
 	strcpy(activity.assets.large_image, "icon");
