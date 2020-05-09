@@ -28,6 +28,14 @@ struct application
 	struct IDiscordActivityManager *activities;
 } app;
 
+// game status
+typedef enum
+{
+	DISCORD_GAME_NOT_LOADED,
+	DISCORD_GAME_LOADED_PAUSED,
+	DISCORD_GAME_LOADED_RUNNING
+} discord_game_status;
+
 // prototypes
 extern int discord_startup();
 extern void discord_update_activities(int status);
