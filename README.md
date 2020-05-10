@@ -13,6 +13,7 @@ It's rather messy.
       # redacted for brevity
       DISCORD_OBJS = discord_all.o
       MAIN_OBJS=blastem.o system.o ... $(DISCORD_OBJS)
+      LDFLAGS+=-ldl # linux only
       ```
 Or forgo the above steps, and do things your own way instead.
 
