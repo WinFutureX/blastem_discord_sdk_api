@@ -68,7 +68,7 @@ int discord_startup()
 	result = discord_create(DISCORD_VERSION, &params, &app.core);
 	if (result != DiscordResult_Ok)
 	{
-		warning("DiscordCreate failed - returned %d\n", result);
+		warning("DiscordCreate failed - returned %d. Is Discord installed and running properly?\n", result);
 		return 1;
 	}
 	printf("Discord API initialised\n");
