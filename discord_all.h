@@ -22,11 +22,11 @@
 
 #include "discord_game_sdk.h"
 
-struct application
+typedef struct
 {
 	struct IDiscordCore *core;
 	struct IDiscordActivityManager *activities;
-} app;
+} application;
 
 // game status
 typedef enum

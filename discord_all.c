@@ -38,6 +38,8 @@
 #endif
 #endif
 
+application app;
+
 // returns 0 on success, 1 otherwise
 int discord_startup()
 {
@@ -59,7 +61,6 @@ int discord_startup()
 		else warning("Couldn't find the DiscordCreate function\n");
 		return 1;
 	}
-	extern struct application app;
 	memset(&app, 0, sizeof(app));
 	static enum EDiscordResult result;
 	struct DiscordCreateParams params;
